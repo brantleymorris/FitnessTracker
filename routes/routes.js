@@ -4,23 +4,17 @@ const Exercise = require("../models/exercise.js");
 
 // sends home page (index)
 router.get("/", (req, res) => {
-    // res.redirect("index.html");
-
-    res.sendPath(path.join(_dirname, "/public/index.html"));
-})
+    res.redirect("index.html");
+});
 
 // sends stats page
 router.get("/stats", (req, res) => {
-    // res.redirect("stats.html");
-
-    res.sendPath(path.join(__dirname, "/public/stats.html"));
+    res.redirect("stats.html");
 });
 
 // sends exercise page
 router.get("/exercise", (req, res) => {
-    // res.redirect("exercise.html");
-
-    res.sendPath(path.join(__dirname, "/public/exercise.html"));
+    res.redirect("exercise.html");
 });
 
 // post request to create new  exercise
