@@ -1,19 +1,26 @@
 const router = require("express").Router();
+const path = require("path");
 const Exercise = require("../models/exercise.js");
 
 // sends home page (index)
 router.get("/", (req, res) => {
-    res.redirect("index.html")
+    // res.redirect("index.html");
+
+    res.sendPath(path.join(_dirname, "/public/index.html"));
 })
 
 // sends stats page
 router.get("/stats", (req, res) => {
-    res.redirect("stats.html");
+    // res.redirect("stats.html");
+
+    res.sendPath(path.join(__dirname, "/public/stats.html"));
 });
 
 // sends exercise page
 router.get("/exercise", (req, res) => {
-    res.redirect("exercise.html");
+    // res.redirect("exercise.html");
+
+    res.sendPath(path.join(__dirname, "/public/exercise.html"));
 });
 
 // post request to create new  exercise
@@ -69,13 +76,13 @@ router.get("/api/workouts/range", (req, res) => {
             }
         }
     }])
-        .then(dbExercise => {
-            console.log(dbExercise);
-            res.json(dbExercise);
-        })
-        .catch(err => {
-            res.status(400).json(err);
-        });
+    .sort({_id: -1})
+    .limit(7)
+    .exec((err, dbExercise) => {
+        if (err) res.json(err);
+        
+        res.json(dbExercise);
+    });
 });
 
 module.exports = router;
